@@ -58,6 +58,7 @@ input {
 button {
     padding: 10px;
     font-family: 'Roboto', sans-serif;
+    font-size: 1em;
     background-color: #28a745;
     color: white;
     border: none;
