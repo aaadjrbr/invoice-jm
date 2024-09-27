@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo JM Braseiro</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Button to download last receipt -->
+        <button id="downloadLastRecibo">Baixe o último recibo</button>
+        <p><em>*Obs: Irá ser deletado em 24 horas</em></p>
+
+        <!-- Button to remove last saved receipt -->
+        <button id="removeLastRecibo" style="background: red; font-size: 0.8em;">Remover último recibo salvo</button>
+        <br/><br/>
+
+        <hr/>
+        <br/>
+        <!-- Recibo form -->
+        <div class="logo">
+            <img src="jm-logo.png" alt="JM Braseiro Logo" width="150"> <!-- Replace with your logo path -->
+        </div>
+        <h1>Recibo</h1>
+        <form id="reciboForm">
+            <!-- Form fields as before -->
+            <label for="valor">Valor: R$</label>
+            <input type="text" id="valor" name="valor" required><br>
+
+            <label for="nomeCliente">Recebi(emos) de:</label>
+            <input type="text" id="nomeCliente" name="nomeCliente" required><br>
+
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" required><br>
+
+            <label for="importancia">A importância de:</label>
+            <input type="text" id="importancia" name="importancia" required><br>
+
+            <label for="referente">Referente:</label>
+            <input type="text" id="referente" name="referente" required><br>
+
+            <label for="assinatura">Para maior clareza firmo o presente:</label>
+            <input type="text" id="assinatura" name="assinatura" placeholder="Deixar vazio para assinatura" readonly><br>
+
+            <label for="data">Data (dd/mm/aaaa):</label>
+            <input type="text" id="data" name="data" placeholder="dia de mês de ano" required><br>
+
+            <label for="extraInfo">Informação extra:</label>
+            <input type="text" id="extraInfo" name="extraInfo" placeholder="Informações adicionais"><br>
+
+            <button type="button" id="generatePDF">Gerar PDF</button>
+        </form>
+    </div>
+    <br/><br/>
+    <script src="script.js"></script>
+</body>
+</html>
