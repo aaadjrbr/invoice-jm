@@ -5,18 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recibo JM Braseiro</title>
     <link rel="stylesheet" href="styles.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Button to download last receipt -->
-        <button id="downloadLastRecibo">Baixe o último recibo</button>
-        <p><em>*Obs: Irá ser deletado em 24 horas</em></p>
-
+        <!-- Loader -->
+        <div id="loader" class="loader">
+            <div class="spinner"></div>
+        </div>
+    
+    <div class="container" style="display: none;" id="content">
         <!-- Button to remove last saved receipt -->
-        <button id="removeLastRecibo" style="background: red; font-size: 0.8em;">Remover último recibo salvo</button>
-        <br/><br/>
+        <button id="removeLastRecibo" style="background: red; font-size: 0.8em;">
+            🗑️ Remover último recibo salvo</button>
+        <br/>
+        <!-- Button to download last receipt -->
+        <button id="downloadLastRecibo">
+        📥 Baixe novamente o último recibo gerado</button>
+        <p>💾 O último recibo gerado é salvo automaticamente.</p>
+        <p><em>*Obs: Recibo salvo irá ser deletado em 24 horas</em></p>
+        <br/>
 
         <hr/>
         <br/>
@@ -24,36 +34,46 @@
         <div class="logo">
             <img src="jm-logo.png" alt="JM Braseiro Logo" width="150"> <!-- Replace with your logo path -->
         </div>
-        <h1>Recibo</h1>
+        <h1>📝 Gerar Recibo</h1>
         <form id="reciboForm">
             <!-- Form fields as before -->
-            <label for="valor">Valor: R$</label>
-            <input type="text" id="valor" name="valor" required><br>
+            <label for="valor">Valor:</label>
+            <p style="font-size: 0.9em;">Exemplo: R$ 900,00</p>
+            <input type="text" id="valor" name="valor" required placeholder="R$ 900,00"><br>
 
             <label for="nomeCliente">Recebi(emos) de:</label>
-            <input type="text" id="nomeCliente" name="nomeCliente" required><br>
+            <p style="font-size: 0.9em;">Exemplo: Márcia Das Graças, CNPJ XXXXXXX</p>
+            <input type="text" id="nomeCliente" name="nomeCliente" required placeholder="Márcia das Graças, CPNJ 101010"><br>
 
             <label for="endereco">Endereço:</label>
-            <input type="text" id="endereco" name="endereco" required><br>
+            <input type="text" id="endereco" name="endereco" required placeholder="Rua 2007, 451, Paineiras"><br>
 
             <label for="importancia">A importância de:</label>
-            <input type="text" id="importancia" name="importancia" required><br>
+            <input type="text" id="importancia" name="importancia" required placeholder="cem reais (R$100,00)"><br>
 
             <label for="referente">Referente:</label>
-            <input type="text" id="referente" name="referente" required><br>
+            <input type="text" id="referente" name="referente" required placeholder="Aniversário Júlia"><br>
 
-            <label for="assinatura">Para maior clareza firmo o presente:</label>
+        <!--<label for="assinatura">Para maior clareza firmo o presente:</label>
             <input type="text" id="assinatura" name="assinatura" placeholder="Deixar vazio para assinatura" readonly><br>
-
+            -->
             <label for="data">Data (dd/mm/aaaa):</label>
-            <input type="text" id="data" name="data" placeholder="dia de mês de ano" required><br>
+            <p style="font-size: 0.9em;">Exemplo: Catalão, 26 de dezembro de 1965.</p>
+            <input type="text" id="data" name="data" placeholder="" required><br>
 
             <label for="extraInfo">Informação extra:</label>
+            <p style="font-size: 0.9em;">Exemplo: Pago via PIX / Pago em dinheiro / Cartão</p>
             <input type="text" id="extraInfo" name="extraInfo" placeholder="Informações adicionais"><br>
 
-            <button type="button" id="generatePDF">Gerar PDF</button>
+            <button type="button" id="generatePDF">🚀 Gerar PDF</button>
+            <br/>
+            <div id="loading" style="display: none; font-weight: bold; text-align: center;">⏳ Emitindo nota...</div>
+            <br/>
+            <button onclick="refreshPage()" style="background: rgb(0, 119, 255); font-size: 0.8em;">
+                🔄 Erro? Atualizar Página</button>
         </form>
     </div>
+    </div><!-- Div for loader -->
     <br/><br/>
     <script src="script.js"></script>
 </body>
